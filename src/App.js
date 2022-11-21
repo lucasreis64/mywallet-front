@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "./Auxiliares/GlobalStyles";
-import Account from "./components/Account";
+import Account from "./components/Account/Account";
 import EditStatement from "./components/EditStatement";
-import NewStatement from "./components/NewStatement";
+import NewStatement from "./components/NewStatement/NewStatement";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
 
@@ -17,7 +17,7 @@ function App() {
                         <Route path="/" element={<SignIn />} />
                         <Route path="/sign-up" element={<SignUp />} />
                         <Route path="/account" element={<Account />} />
-                        <Route path="/new" element={<NewStatement />} />
+                        <Route path="/new/:type" element={<NewStatement />} />
                         <Route path="/edit" element={<EditStatement />} />
                     </Routes>
                 </BrowserRouter>
@@ -40,7 +40,6 @@ const SmartPhoneContainer = styled.div`
     width: 400px;
     height: 85vh;
     background-color: ${props=> props.noturno?'#1C1C1C':'#e5e5e5'};
-    padding: 70px 0px;
     box-sizing: border-box;
     overflow: scroll;
     position: relative;
