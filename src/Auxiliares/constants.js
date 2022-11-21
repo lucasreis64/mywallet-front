@@ -17,3 +17,4 @@ export const carregamento = (
 export const urlLogin = 'http://localhost:5000/auth/sign-in'
 export const urlSignUp = 'http://localhost:5000/auth/sign-up'
 export const urlAccounts = 'http://localhost:5000/accounts'
+export const urlPostStatement = 'http://localhost:5000/accounts'

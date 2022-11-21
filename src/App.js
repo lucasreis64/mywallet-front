@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "./Auxiliares/GlobalStyles";
 import Account from "./components/Account/Account";
-import EditStatement from "./components/EditStatement";
+import EditStatement from "./components/EditStatement/EditStatement";
 import NewStatement from "./components/NewStatement/NewStatement";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
@@ -18,7 +18,7 @@ function App() {
                         <Route path="/sign-up" element={<SignUp />} />
                         <Route path="/account" element={<Account />} />
                         <Route path="/new/:type" element={<NewStatement />} />
-                        <Route path="/edit" element={<EditStatement />} />
+                        <Route path="/edit/:type/:id" element={<EditStatement />} />
                     </Routes>
                 </BrowserRouter>
             </SmartPhoneContainer>

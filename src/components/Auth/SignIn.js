@@ -57,7 +57,7 @@ export default function SignIn(params) {
     }
 
     return (
-        <LoginContainer>
+        <LoginContainer loading={loading}>
             <div>MyWallet</div>
             {!loading ? (
                 <>
@@ -92,12 +92,12 @@ export default function SignIn(params) {
                         </label>
                     </form>
                     <Link to="/sign-up">
-                        <p>Já tem uma conta? Faça login!</p>
+                        <p>Primeira vez? Cadastre-se!</p>
                     </Link>
                 </>
             ) : (
                 <>
-                    <form action="/hoje" onSubmit={handleSubmit}>
+                    <form action="" onSubmit={handleSubmit}>
                         <input
                             name="email"
                             type="email"
@@ -116,7 +116,7 @@ export default function SignIn(params) {
                         />
                         <button disabled>{carregamento}</button>
                         <label>
-                            Primeira vez? Cadastre-se!
+                            Permanecer conectado?
                             <input
                                 disabled
                                 className="check"
@@ -158,7 +158,7 @@ export const LoginContainer = styled.div`
         font-weight: 400;
         font-size: 32px;
         color: #ffffff;
-        animation: ${deslizarCima} ${tempo}, ${tremerZoom} ${"500ms"} 1 ${tempo};
+        animation: ${(props) => (props.loading ? 'none' :deslizarCima)} ${tempo}, ${tremerZoom} ${"500ms"} 1 ${tempo};
     }
     form {
         display: flex;
@@ -175,6 +175,7 @@ export const LoginContainer = styled.div`
         border-radius: 5px;
         box-sizing: border-box;
         animation: ${deslizarCima} ${tempo};
+        outline: none;
     }
     input.check {
         width: 15px;
@@ -205,7 +206,7 @@ export const LoginContainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        animation: ${deslizarCima} ${tempo};
+        animation: ${(props) => (props.loading ? 'none' :deslizarCima)} ${tempo};
     }
     p {
         margin-top: 25px;

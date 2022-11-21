@@ -11,17 +11,16 @@ import minus from "../../img/minus.png";
 import StatementDetail from "./StatementList";
 
 export default function Account(params) {
-    const { userInfo } = useContext(contexto);
+    const { userInfo, setUserInfo } = useContext(contexto);
     const [statement, setStatement] = useState(null);
     const [name, setName] = useState("");
-    const [balance, setBalance] = useState('...');
+    const [balance, setBalance] = useState("...");
     const [color, setColor] = useState("black");
-    const [addStatement, setAddStatement] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         getStatement();
-    }, [addStatement]);
+    }, []);
 
     function attBalance(statementList) {
         let balanceAtt = 0;
@@ -35,7 +34,7 @@ export default function Account(params) {
         else if (balanceAtt === 0) setColor("black");
         else setColor("#03AC00");
 
-        balanceAtt = balanceAtt.toFixed(2).replace("-", "").replace(".",",");
+        balanceAtt = balanceAtt.toFixed(2).replace("-", "").replace(".", ",");
         setBalance(balanceAtt);
     }
 
@@ -61,22 +60,42 @@ export default function Account(params) {
         <AccountContainer>
             <div>
                 <h1>Olá, {name}</h1>
-                <img src={signOut} alt="" />
+                <img
+                    onClick={() => (
+                        <>
+                            {localStorage.clear()};{setUserInfo({})};
+                            {navigate("/")}
+                        </>
+                    )}
+                    src={signOut}
+                    alt=""
+                />
             </div>
-            <StatementContainer>
-                {statement ? (
-                    statement.map((s, index) => {
-                        return <StatementDetail key={index} statement={s} />;
-                    })
+            <StatementContainer
+                statement={statement}
+                length={statement ? statement.length : undefined}
+            >
+                {statement && statement.length > 0 ? (
+                    <>
+                        {statement.map((s, index) => {
+                            return (
+                                <StatementDetail
+                                    key={index}
+                                    getStatement={getStatement}
+                                    statement={s}
+                                />
+                            );
+                        })}
+                        <SaldoContainer color={color}>
+                            <h1>SALDO</h1>
+                            <h2>{balance}</h2>
+                        </SaldoContainer>
+                    </>
                 ) : (
                     <h2>
                         Não há registros de <br /> entrada ou saída
                     </h2>
                 )}
-                <SaldoContainer color={color}>
-                    <h1>SALDO</h1>
-                    <h2>{balance}</h2>
-                </SaldoContainer>
             </StatementContainer>
             <NewContainer>
                 <Link to="/new/income">
@@ -132,7 +151,11 @@ const StatementContainer = styled.div`
     border-radius: 5px;
     height: 70%;
     display: flex;
-    justify-content: center;
+    justify-content: ${(props) =>
+        props.statement && props.length > 0
+            ? "space-between"
+            : "center"} !important;
+    align-items: center;
     flex-direction: column;
     overflow: scroll;
     padding: 20px 10px 0 10px;
@@ -190,7 +213,8 @@ const SaldoContainer = styled.div`
     position: sticky;
     bottom: 0%;
     background-color: white;
-    padding: 5% 0;
+    padding: 4.7% 5%;
+
     h1 {
         font-size: 17px !important;
         color: black !important;

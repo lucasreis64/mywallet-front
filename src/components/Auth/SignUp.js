@@ -121,6 +121,7 @@ export const CadastroContainer = styled.div`
         border-radius: 5px;
         box-sizing: border-box;
         animation: ${deslizarCima} ${tempo};
+        outline: none;
     }
     input.check{
         width: 15px;
