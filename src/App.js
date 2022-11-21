@@ -4,8 +4,8 @@ import GlobalStyle from "./Auxiliares/GlobalStyles";
 import Account from "./components/Account";
 import EditStatement from "./components/EditStatement";
 import NewStatement from "./components/NewStatement";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import SignIn from "./components/Auth/SignIn";
+import SignUp from "./components/Auth/SignUp";
 
 function App() {
     return (

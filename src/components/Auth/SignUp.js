@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { urlSignUp } from "../Auxiliares/constants";
+import { urlSignUp } from "../../Auxiliares/constants";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { carregamento } from "../Auxiliares/constants";
+import { carregamento } from "../../Auxiliares/constants";
 import Swal from "sweetalert2";
-import { deslizarCima, tremerZoom } from "../Auxiliares/animations";
+import { deslizarCima, tremerZoom } from "../../Auxiliares/animations";
 
 
 let tempoMs;
@@ -63,7 +63,7 @@ export default function SignUp(params) {
                     <input name="password" type="password" placeholder="Confirme a senha" value={repeatPassword} onChange={(e)=>setRepeatPassword(e.target.value)} required/>
                     <button>Cadastrar</button>
                 </form>
-                <Link to="/"><p>Já tem uma conta? Faça login!</p></Link>
+                <Link to="/"><p>Já tem uma conta? Entre agora!</p></Link>
             </>
                 :
             <>
@@ -74,7 +74,7 @@ export default function SignUp(params) {
                     <input name="password" type="password" placeholder="Confirme a senha" value={repeatPassword} onChange={(e)=>setRepeatPassword(e.target.value)} disabled/>
                     <button disabled>{carregamento}</button>
                 </form>
-                <Link to="/"><p>Já tem uma conta? Faça login!</p></Link>
+                <Link to="/"><p>Já tem uma conta? Entre agora!</p></Link>
             </>
             }
         </CadastroContainer>
@@ -93,16 +93,19 @@ export const CadastroContainer = styled.div`
     justify-content: start;
     padding: 30% 10%;
     box-sizing: border-box;
-    background-color: ${props=> props.noturno?'#1C1C1C':'white'};
+    background-color: ${(props) => (props.noturno ? "#1C1C1C" : "#8C11BE")};
     height: 100%;
     position: absolute;
     top: 0;
     width: 100%;
     animation: ${deslizarCima} ${tempo};
-    img{
-        height: 28%;
-        margin-bottom: 15%;
-        animation: ${deslizarCima} ${tempo}, ${tremerZoom} ${'500ms'} 1 ${tempo};;
+    div {
+        font-family: "Saira Stencil One";
+        margin-bottom: 25px;
+        font-weight: 400;
+        font-size: 32px;
+        color: #ffffff;
+        animation: ${deslizarCima} ${tempo}, ${tremerZoom} ${"500ms"} 1 ${tempo};
     }
     form{
         display: flex;
@@ -140,10 +143,10 @@ export const CadastroContainer = styled.div`
         font-family: 'Lexend Deca';
         width: 100%;
         height: 45px;
-        background: #52B6FF;
+        color: white;
+        background-color: #A328D6;
         border-radius: 4.63636px;
         border: none;
-        color: white;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -155,8 +158,7 @@ export const CadastroContainer = styled.div`
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
-        text-decoration-line: underline;
-        color: #52B6FF;
+        color: white !important;
         animation: ${deslizarCima} ${tempo};
     }
 `
