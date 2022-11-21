@@ -77,15 +77,17 @@ export default function Account(params) {
             >
                 {statement && statement.length > 0 ? (
                     <>
-                        {statement.map((s, index) => {
-                            return (
-                                <StatementDetail
-                                    key={index}
-                                    getStatement={getStatement}
-                                    statement={s}
-                                />
-                            );
-                        })}
+                        <StatementsList>
+                            {statement.map((s, index) => {
+                                return (
+                                    <StatementDetail
+                                        key={index}
+                                        getStatement={getStatement}
+                                        statement={s}
+                                    />
+                                );
+                            })}
+                        </StatementsList>
                         <SaldoContainer color={color}>
                             <h1>SALDO</h1>
                             <h2>{balance}</h2>
@@ -144,6 +146,12 @@ const AccountContainer = styled.div`
         }
     }
 `;
+
+const StatementsList = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+`
 
 const StatementContainer = styled.div`
     margin-top: 20px;
