@@ -41,9 +41,9 @@ export default function Account(params) {
 
     function getStatement() {
         if (JSON.stringify(userInfo) === "{}") {
-            console.log("oi");
             navigate("/");
         }
+
         const statementList = axios.get(urlAccounts, {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`,
@@ -65,8 +65,8 @@ export default function Account(params) {
             </div>
             <StatementContainer>
                 {statement ? (
-                    statement.map((s) => {
-                        return <StatementDetail statement={s} />;
+                    statement.map((s, index) => {
+                        return <StatementDetail key={index} statement={s} />;
                     })
                 ) : (
                     <h2>
