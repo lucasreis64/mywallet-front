@@ -14,7 +14,7 @@ export default function StatementDetail({ statement }) {
                 <h4>{statement.description}</h4>
             </div>
 
-            <h5>{statement.value}</h5>
+            <h5>{statement.value.replace(".",",")}</h5>
         </StatementDetailDiv>
     );
 }

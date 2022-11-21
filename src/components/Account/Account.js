@@ -14,7 +14,7 @@ export default function Account(params) {
     const { userInfo } = useContext(contexto);
     const [statement, setStatement] = useState(null);
     const [name, setName] = useState("");
-    const [balance, setBalance] = useState(0);
+    const [balance, setBalance] = useState('...');
     const [color, setColor] = useState("black");
     const [addStatement, setAddStatement] = useState(false);
     const navigate = useNavigate();
@@ -23,10 +23,10 @@ export default function Account(params) {
         getStatement();
     }, [addStatement]);
 
-    function attBalance() {
+    function attBalance(statementList) {
         let balanceAtt = 0;
 
-        statement.forEach((s) => {
+        statementList.forEach((s) => {
             if (s.type === "debits") balanceAtt -= Number(s.value);
             else balanceAtt += Number(s.value);
         });
@@ -35,7 +35,7 @@ export default function Account(params) {
         else if (balanceAtt === 0) setColor("black");
         else setColor("#03AC00");
 
-        balanceAtt = balanceAtt.toString().replace("-", "");
+        balanceAtt = balanceAtt.toFixed(2).replace("-", "").replace(".",",");
         setBalance(balanceAtt);
     }
 
@@ -52,7 +52,7 @@ export default function Account(params) {
         statementList.then((response) => {
             setStatement(response.data.statement);
             setName(response.data.name);
-            attBalance();
+            attBalance(response.data.statement);
         });
         statementList.catch((response) => console.error(response));
     }
